@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Daisy
+GenericName=Daisy App
+Comment=Monitors websites and network locations
+Categories=Utility;Internet;
+Exec=com.github.keithnyc.daisy
+Icon=application-default-icon
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=hello-again
+Keywords=Network;Monitor;Daisy;Web;
