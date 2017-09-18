@@ -8,4 +8,4 @@ Icon=application-default-icon
 Terminal=false
 Type=Application
 X-GNOME-Gettext-Domain=hello-again
-Keywords=Network;Monitor;Daisy;Web;
+Keywords=Network;Monitor;Internet;

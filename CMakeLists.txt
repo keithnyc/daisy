@@ -34,10 +34,11 @@ ensure_vala_version("0.16" MINIMUM)
  # files we want to compile
 include(ValaPrecompile)
 vala_precompile(VALA_C ${EXEC_NAME}
-    src/daisy.vala
-
+    src/Daisy.vala
+    src/DaisyWindow.vala
     PACKAGES
         gtk+-3.0
+        granite
 )
 
 add_executable(${EXEC_NAME} ${VALA_C})
