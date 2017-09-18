@@ -16,7 +16,11 @@ set (VERSION "0.1a")
 set (VERSION_INFO "Very first release")
 
 find_package(PkgConfig)
-pkg_check_modules(DEPS REQUIRED gtk+-3.0)
+pkg_check_modules(DEPS REQUIRED
+        gtk+-3.0>=3.16
+        granite>=0.3.0
+        glib-2.0>=2.39)
+
 add_definitions(${DEPS_CFLAGS})
 link_libraries(${DEPS_LIBRARIES})
 link_directories(${DEPS_LIBRARY_DIRS})
@@ -37,8 +41,9 @@ vala_precompile(VALA_C ${EXEC_NAME}
     src/Daisy.vala
     src/DaisyWindow.vala
     PACKAGES
-        gtk+-3.0
+        gtk+-3.0 
         granite
+        glib-2.0       
 )
 
 add_executable(${EXEC_NAME} ${VALA_C})
