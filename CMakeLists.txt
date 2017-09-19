@@ -40,6 +40,7 @@ include(ValaPrecompile)
 vala_precompile(VALA_C ${EXEC_NAME}
     src/Daisy.vala
     src/DaisyWindow.vala
+    src/Components/HeaderBar.vala
     PACKAGES
         gtk+-3.0 
         granite
