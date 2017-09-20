@@ -20,81 +20,21 @@
 namespace Daisy {
 
     public class DaisyWindow : Gtk.Window {
-
-        private enum Columns {
-            ENDPOINT,
-            RESPONSE,
-            STATUS,
-            N_COLUMNS
-        }
-
-        //GUI
-        private Gtk.ListStore       endpoint_list;
-        private Gtk.TreeView        endpoint_treeview;
-        private Gtk.Grid            grid;
-        private Gtk.Entry           endpoint_entry;
-        private Gtk.ScrolledWindow  scrolled_window;
-
-
-        public DaisyWindow () {
-            
-            const string ELEMENTARY_STYLESHEET = """
-                .titlebar {
-                    background-color: @bg_color;
-                    background-image: none;
-                    border: none;
-                }
-                .welcome {
-                    background-color: @bg_color;
-                }
-                GtkTreeView {
-                    color: @fg_color;
-                    background-color: @bg_color;
-                }
-                GtkTreeView:selected {
-                    color: @selected_fg_color;
-                    background-color: @selected_bg_color;
-                }
-                GtkTreeView .entry {
-                    background-image: none;
-                    background-color: @bg_color;
-                    border-bottom: 1px solid @fg_color;
-                }
-                GtkTreeView .entry selection,
-                GtkTreeView .entry selection:focus,
-                GtkTreeView .entry:selected,
-                GtkTreeView .entry:selected:focus {
-                    background-color: @colorAccent;
-                }
-            """;
+        private EndPointListManager endPointListManager = EndPointListManager.get_instance();
+        private StackManager stackManager = StackManager.get_instance ();
         
-            Granite.Widgets.Utils.set_theming_for_screen (this.get_screen (), ELEMENTARY_STYLESHEET,
-                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        construct {
+            set_default_size (800, 600);
+            set_size_request (800, 600);
+            set_titlebar (new HeaderBar());
             
-            endpoint_list = new Gtk.ListStore (Columns.N_COLUMNS,
-                                                typeof(string),
-                                                typeof(string),
-                                                typeof(string));
-            scrolled_window = new Gtk.ScrolledWindow (null, null);
-            endpoint_entry = new Gtk.Entry ();
-            grid = new Gtk.Grid ();
-            endpoint_treeview = new Gtk.TreeView ();
-
-
-        }
-
-        private void load_endpoint_list () {
-            
-        }
-
-        public void update () {
-
-        }
-
-        public bool main_quit (){
-            this.destroy ();
-            return false;
-        }
+            stackManager.load_views(this);
+            endPointListManager.listbox.load_endpoints ();
+            stackManager.get_stack().visible_child_name = "endpoint-view";
+            Utils.print_log ("stackManager visible child: " + stackManager.get_stack().visible_child_name);
+            Utils.print_log ("DaisyWindow construct completed");
+        }       
 
     }
 
