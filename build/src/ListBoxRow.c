@@ -109,22 +109,18 @@ DaisyListBoxRow* daisy_list_box_row_construct (GType object_type, DaisyEndPoint*
 	DaisyListBoxRow * self = NULL;
 	DaisyEndPoint* _tmp0_;
 	DaisyEndPoint* _tmp1_;
+	GtkGrid* grid = NULL;
+	GtkGrid* _tmp2_;
 	GtkLabel* name_label = NULL;
-	DaisyEndPoint* _tmp2_;
-	GtkLabel* _tmp3_;
+	DaisyEndPoint* _tmp3_;
+	GtkLabel* _tmp4_;
 	GtkLabel* endpoint_label = NULL;
-	DaisyEndPoint* _tmp4_;
-	GtkLabel* _tmp5_;
+	DaisyEndPoint* _tmp5_;
+	GtkLabel* _tmp6_;
 	GtkLabel* status_label = NULL;
-	DaisyEndPoint* _tmp6_;
-	GtkLabel* _tmp7_;
-	GtkBox* _tmp8_;
-	GtkBox* _tmp9_;
-	GtkBox* _tmp10_;
-	GtkBox* endpoint_row = NULL;
-	GtkBox* _tmp11_;
-	GtkImage* _tmp12_;
-	GtkBox* _tmp13_;
+	DaisyEndPoint* _tmp7_;
+	GtkLabel* _tmp8_;
+	GtkImage* _tmp9_;
 #line 26 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_return_val_if_fail (ep != NULL, NULL);
 #line 26 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
@@ -137,58 +133,48 @@ DaisyListBoxRow* daisy_list_box_row_construct (GType object_type, DaisyEndPoint*
 	_g_object_unref0 (self->priv->endpoint);
 #line 27 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	self->priv->endpoint = _tmp1_;
+#line 28 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+	_tmp2_ = (GtkGrid*) gtk_grid_new ();
+#line 28 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+	g_object_ref_sink (_tmp2_);
+#line 28 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+	grid = _tmp2_;
 #line 29 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp2_ = ep;
+	_tmp3_ = ep;
 #line 29 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp3_ = daisy_list_box_row_generate_name_label (self, _tmp2_);
+	_tmp4_ = daisy_list_box_row_generate_name_label (self, _tmp3_);
 #line 29 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	name_label = _tmp3_;
+	name_label = _tmp4_;
 #line 30 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp4_ = ep;
+	_tmp5_ = ep;
 #line 30 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp5_ = daisy_list_box_row_generate_endpoint_label (self, _tmp4_);
+	_tmp6_ = daisy_list_box_row_generate_endpoint_label (self, _tmp5_);
 #line 30 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	endpoint_label = _tmp5_;
+	endpoint_label = _tmp6_;
 #line 31 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp6_ = ep;
+	_tmp7_ = ep;
 #line 31 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp7_ = daisy_list_box_row_generate_status_label (self, _tmp6_);
+	_tmp8_ = daisy_list_box_row_generate_status_label (self, _tmp7_);
 #line 31 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	status_label = _tmp7_;
+	status_label = _tmp8_;
 #line 33 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp8_ = self->priv->vertical_box;
-#line 33 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	gtk_container_add ((GtkContainer*) _tmp8_, (GtkWidget*) name_label);
+	gtk_grid_set_column_spacing (grid, 2);
 #line 34 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp9_ = self->priv->vertical_box;
-#line 34 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	gtk_container_add ((GtkContainer*) _tmp9_, (GtkWidget*) endpoint_label);
+	gtk_widget_set_margin_left ((GtkWidget*) grid, 10);
 #line 35 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp10_ = self->priv->vertical_box;
-#line 35 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	gtk_container_add ((GtkContainer*) _tmp10_, (GtkWidget*) status_label);
+	gtk_container_add ((GtkContainer*) self, (GtkWidget*) grid);
 #line 37 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp11_ = (GtkBox*) gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+	_tmp9_ = self->priv->icon;
 #line 37 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	g_object_ref_sink (_tmp11_);
-#line 37 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	endpoint_row = _tmp11_;
+	gtk_grid_attach (grid, (GtkWidget*) _tmp9_, 0, 0, 1, 1);
 #line 38 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	g_object_set ((GtkWidget*) endpoint_row, "margin", 12, NULL);
+	gtk_grid_attach (grid, (GtkWidget*) name_label, 1, 0, 1, 1);
 #line 39 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp12_ = self->priv->icon;
-#line 39 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	gtk_container_add ((GtkContainer*) endpoint_row, (GtkWidget*) _tmp12_);
+	gtk_grid_attach (grid, (GtkWidget*) endpoint_label, 1, 1, 1, 1);
 #line 40 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_tmp13_ = self->priv->vertical_box;
-#line 40 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	gtk_container_add ((GtkContainer*) endpoint_row, (GtkWidget*) _tmp13_);
+	gtk_grid_attach_next_to (grid, (GtkWidget*) status_label, (GtkWidget*) endpoint_label, GTK_POS_RIGHT, 1, 1);
 #line 42 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	gtk_container_add ((GtkContainer*) self, (GtkWidget*) endpoint_row);
-#line 43 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	daisy_utils_print_log ("ListBoxRow completed");
-#line 26 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
-	_g_object_unref0 (endpoint_row);
 #line 26 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_g_object_unref0 (status_label);
 #line 26 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
@@ -196,15 +182,17 @@ DaisyListBoxRow* daisy_list_box_row_construct (GType object_type, DaisyEndPoint*
 #line 26 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_g_object_unref0 (name_label);
 #line 26 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+	_g_object_unref0 (grid);
+#line 26 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	return self;
-#line 201 "ListBoxRow.c"
+#line 189 "ListBoxRow.c"
 }
 
 
 DaisyListBoxRow* daisy_list_box_row_new (DaisyEndPoint* ep) {
 #line 26 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	return daisy_list_box_row_construct (DAISY_TYPE_LIST_BOX_ROW, ep);
-#line 208 "ListBoxRow.c"
+#line 196 "ListBoxRow.c"
 }
 
 
@@ -218,41 +206,41 @@ GtkLabel* daisy_list_box_row_generate_name_label (DaisyListBoxRow* self, DaisyEn
 	gchar* _tmp4_;
 	GtkLabel* _tmp5_;
 	GtkLabel* _tmp6_;
-#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 45 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_return_val_if_fail (self != NULL, NULL);
-#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 45 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_return_val_if_fail (ep != NULL, NULL);
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp0_ = ep;
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp1_ = daisy_end_point_get_name (_tmp0_);
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp2_ = _tmp1_;
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp3_ = g_strdup_printf ("<b>%s</b>", _tmp2_);
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp4_ = _tmp3_;
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp5_ = (GtkLabel*) gtk_label_new (_tmp4_);
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_object_ref_sink (_tmp5_);
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp6_ = _tmp5_;
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_g_free0 (_tmp4_);
-#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 46 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	name_label = _tmp6_;
-#line 48 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 47 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	gtk_label_set_use_markup (name_label, TRUE);
-#line 49 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 48 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	gtk_widget_set_halign ((GtkWidget*) name_label, GTK_ALIGN_START);
-#line 51 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 50 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	daisy_utils_print_log ("generate_name_label completed");
-#line 53 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 52 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	result = name_label;
-#line 53 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 52 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	return result;
-#line 256 "ListBoxRow.c"
+#line 244 "ListBoxRow.c"
 }
 
 
@@ -263,29 +251,29 @@ GtkLabel* daisy_list_box_row_generate_endpoint_label (DaisyListBoxRow* self, Dai
 	const gchar* _tmp1_;
 	const gchar* _tmp2_;
 	GtkLabel* _tmp3_;
-#line 56 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 55 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_return_val_if_fail (self != NULL, NULL);
-#line 56 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 55 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_return_val_if_fail (ep != NULL, NULL);
-#line 57 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 56 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp0_ = ep;
-#line 57 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 56 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp1_ = daisy_end_point_get_ip (_tmp0_);
-#line 57 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 56 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp2_ = _tmp1_;
-#line 57 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 56 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp3_ = (GtkLabel*) gtk_label_new (_tmp2_);
-#line 57 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 56 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_object_ref_sink (_tmp3_);
-#line 57 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 56 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	ip_label = _tmp3_;
-#line 58 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 57 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	gtk_widget_set_halign ((GtkWidget*) ip_label, GTK_ALIGN_START);
-#line 60 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 59 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	result = ip_label;
-#line 60 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 59 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	return result;
-#line 289 "ListBoxRow.c"
+#line 277 "ListBoxRow.c"
 }
 
 
@@ -301,45 +289,45 @@ GtkLabel* daisy_list_box_row_generate_status_label (DaisyListBoxRow* self, Daisy
 	gchar* _tmp6_;
 	GtkLabel* _tmp7_;
 	GtkLabel* _tmp8_;
-#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 62 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_return_val_if_fail (self != NULL, NULL);
-#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 62 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_return_val_if_fail (ep != NULL, NULL);
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp0_ = ep;
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp1_ = daisy_end_point_get_status (_tmp0_);
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp2_ = _tmp1_;
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp3_ = g_strconcat ("<b>", _tmp2_, NULL);
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp4_ = _tmp3_;
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp5_ = g_strconcat (_tmp4_, "</b>", NULL);
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp6_ = _tmp5_;
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp7_ = (GtkLabel*) gtk_label_new (_tmp6_);
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	g_object_ref_sink (_tmp7_);
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_tmp8_ = _tmp7_;
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_g_free0 (_tmp6_);
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	_g_free0 (_tmp4_);
-#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 63 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	status_label = _tmp8_;
-#line 65 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 64 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	gtk_widget_set_halign ((GtkWidget*) status_label, GTK_ALIGN_START);
-#line 66 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 65 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	gtk_label_set_use_markup (status_label, TRUE);
-#line 67 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 66 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	result = status_label;
-#line 67 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
+#line 66 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	return result;
-#line 343 "ListBoxRow.c"
+#line 331 "ListBoxRow.c"
 }
 
 
@@ -350,7 +338,7 @@ static void daisy_list_box_row_class_init (DaisyListBoxRowClass * klass) {
 	g_type_class_add_private (klass, sizeof (DaisyListBoxRowPrivate));
 #line 19 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	G_OBJECT_CLASS (klass)->finalize = daisy_list_box_row_finalize;
-#line 354 "ListBoxRow.c"
+#line 342 "ListBoxRow.c"
 }
 
 
@@ -376,7 +364,7 @@ static void daisy_list_box_row_instance_init (DaisyListBoxRow * self) {
 	g_object_ref_sink (_tmp2_);
 #line 23 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	self->priv->icon = _tmp2_;
-#line 380 "ListBoxRow.c"
+#line 368 "ListBoxRow.c"
 }
 
 
@@ -394,7 +382,7 @@ static void daisy_list_box_row_finalize (GObject * obj) {
 	_g_object_unref0 (self->priv->endpoint);
 #line 19 "/home/keith/Projects/daisy/src/ListBoxRow.vala"
 	G_OBJECT_CLASS (daisy_list_box_row_parent_class)->finalize (obj);
-#line 398 "ListBoxRow.c"
+#line 386 "ListBoxRow.c"
 }
 
 

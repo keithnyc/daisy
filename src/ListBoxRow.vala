@@ -25,21 +25,20 @@ namespace Daisy {
 
         public ListBoxRow (EndPoint ep) {
             this.endpoint = ep;
-
+            Gtk.Grid grid = new Gtk.Grid ();            
             var name_label = generate_name_label (ep);
             var endpoint_label = generate_endpoint_label (ep);
             var status_label = generate_status_label (ep);
 
-            vertical_box.add (name_label);
-            vertical_box.add (endpoint_label);
-            vertical_box.add (status_label);
+            grid.column_spacing = 2;
+            grid.margin_left = 10;
+            this.add (grid);
 
-            var endpoint_row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
-            endpoint_row.margin = 12;
-            endpoint_row.add (icon);
-            endpoint_row.add (vertical_box);
-
-            this.add (endpoint_row);
+            grid.attach (icon, 0, 0, 1, 1);
+            grid.attach (name_label, 1, 0, 1, 1);
+            grid.attach (endpoint_label, 1, 1, 1, 1);
+            grid.attach_next_to (status_label, endpoint_label, Gtk.PositionType.RIGHT, 1, 1 );
+            
             Utils.print_log ("ListBoxRow completed");
         }
 
